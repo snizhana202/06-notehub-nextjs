@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
+import Modal from "@/components/Modal/Modal";
+import NoteForm from "@/components/NoteForm/NoteForm";
 
 export default function NotesClient() {
   const [page, setPage] = useState(1);
@@ -50,7 +52,13 @@ export default function NotesClient() {
 
       {isLoading && <p>Loading...</p>}
       {error && <p>Error loading notes</p>}
+
       {data && <NoteList notes={data.notes} />}
+      {isModalOpen && (
+        <Modal onClose={() => setIsModalOpen(false)}>
+          <NoteForm onCancel={() => setIsModalOpen(false)} />
+        </Modal>
+      )}
     </div>
   );
 }
