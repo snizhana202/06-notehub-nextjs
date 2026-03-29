@@ -31,21 +31,18 @@ export default function NotesClient() {
   });
 
   const totalPages = data ? data.totalPages : 0;
+
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
         <SearchBox value={inputValue} onChange={setInputValue} />
-        {data && (
-        <>
-          {totalPages > 1 && (
-            <Pagination
-              totalPages={data.totalPages}
-              currentPage={page}
-              onPageChange={setPage}
-            />
-          )}
-        </>
-      )}
+        {data && totalPages > 1 && (
+          <Pagination
+            totalPages={data.totalPages}
+            currentPage={page}
+            onPageChange={setPage}
+          />
+        )}
         <button className={css.button} onClick={() => setIsModalOpen(true)}>
           Create note +
         </button>
@@ -53,7 +50,7 @@ export default function NotesClient() {
 
       {isLoading && <p>Loading...</p>}
       {error && <p>Error loading notes</p>}
-      {data && ( <NoteList notes={data.notes} />)}
+      {data && <NoteList notes={data.notes} />}
     </div>
   );
 }

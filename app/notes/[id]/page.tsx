@@ -13,7 +13,7 @@ type Props = {
 };
 
 const NoteDetails = async ({ params }: Props) => {
-  const { id } = await params;
+  const id = params.id;
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -23,7 +23,7 @@ const NoteDetails = async ({ params }: Props) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NoteDetailsClient />
+      <NoteDetailsClient id={id} />
     </HydrationBoundary>
   );
 };

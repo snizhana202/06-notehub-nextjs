@@ -3,24 +3,23 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from 'next/navigation';
 import { fetchNoteById } from "@/lib/api";
 import css from "./NoteDetails.module.css";
 
-const NoteDetailsClient = () => {
-	const params = useParams();
-  const id = params.id as string;
+type Props = {
+  id: string;
+};
 
+const NoteDetailsClient = ({ id }: Props) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["note", id],
     queryFn: () => fetchNoteById(id),
-    refetchOnMount: false,
   });
 
   if (isLoading) return <p>Loading, please wait...</p>;
-
   if (error || !data?.note) return <p>Something went wrong.</p>;
- const note = data.note;
+
+  const note = data.note;
 
   return (
     <div className={css.container}>
