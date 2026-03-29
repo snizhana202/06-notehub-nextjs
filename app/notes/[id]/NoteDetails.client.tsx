@@ -17,9 +17,9 @@ const NoteDetailsClient = () => {
     refetchOnMount: false,
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading, please wait...</p>;
 
-  if (error || !data?.note) return <p>Some error..</p>;
+  if (error || !data?.note) return <p>Something went wrong.</p>;
  const note = data.note;
 
   return (
